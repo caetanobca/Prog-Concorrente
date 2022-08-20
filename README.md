@@ -18,11 +18,12 @@ Implemente a função handle seguindo a assinatura abaixo (e qualquer outra fun�
 Sua implementação da função handle deve usar a API com as funções itemsStream e bid, considerando as seguintes restrições:
 - Você deve criar um número de nServers goroutines para executar as funções bid; 
 - A execução da função bid pode demorar muito tempo;
-- Um Item rUm Item recebido no canal retornado pela função itemsStream deve ser enviado somente para um servidor. Ou seja, você deve executar somente uma vez a função bid para um determinado Item;
-    Você deve evitar ociosidade dos servidores de bid. Ou seja, se um Item estiver disponível no canal itemsStream, deve ser evitar ociosidade dos servidores de bid. Ou seja, se um Item estiver disponível no canal itemsStream, deve ser enviado para processamento por um servidor de bid;
+- Um Item recebido no canal retornado pela função itemsStream deve ser enviado somente para um servidor. Ou seja, você deve executar somente uma vez a função bid para um determinado Item;
+- Você deve evitar ociosidade dos servidores de bid. Ou seja, se um Item estiver disponível no canal itemsStream, deve ser enviado para processamento por um servidor de bid;
 - Na medida em que novos valores de Bid seja retornados, esse valores devem ser enviados no canal de resposta da função handle;
 - Após o canal retornado por itemsStream ter sido fechado e não houver mais conteúdo a ser consumido, as goroutines que executam bid devem terminar;
 - Após todo o conteúdo de bid ter sido gerado e enviado para o canal de resposta da função handle, esse canal de resposta deve ser fechado.
+
 
 ## [9. Bid timeout](./codigos/9-bid-timeout.go)
 Implemente uma variação da função handle descrita acima, seguindo a nova assinatura abaixo:
