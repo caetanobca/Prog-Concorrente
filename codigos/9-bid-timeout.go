@@ -7,7 +7,7 @@ import (
 
 func main() {
 	nServers := 5
-	timeout := 6
+	timeout := 1
 	bidChan := handle(nServers, timeout)
 
 	for bid := range bidChan {
@@ -27,9 +27,14 @@ func itemsStream() chan int {
  * lance obtido (bid) para o item
  */
 func bid(item int) <-chan Bid {
-	time.Sleep(3 * time.Second)
 	chBid := make(chan Bid)
-	chBid <- Bid{item, 3, false}
+
+	go func() {
+		defer close(chBid)
+		time.Sleep(3 * time.Second)
+		chBid <- Bid{item, 3, false}
+	}()
+
 	return chBid
 }
 
@@ -48,17 +53,15 @@ func handle(nServers int, timeout int) <-chan Bid {
 	for i := 0; i < nServers; i++ {
 		go func() {
 			for item := range itensChan {
-				timer := time.Tick(time.Second * 1)
+
+				timer := time.Tick(time.Second * time.Duration(timeout))
 				var result Bid
+
 				chBid := bid(item)
 				select {
 				case result = <-chBid:
-					fmt.Print("oi")
 				case <-timer:
-					// result = Bid{item, -1, true}
-					fmt.Print("opa")
-				default:
-					fmt.Print("ola")
+					result = Bid{item, -1, true}
 				}
 				bidChan <- result
 			}
