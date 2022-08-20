@@ -7,7 +7,7 @@ import (
 
 func main() {
 	nServers := 5
-	timeout := 1
+	timeout := 10
 	bidChan := handle(nServers, timeout)
 
 	for bid := range bidChan {
