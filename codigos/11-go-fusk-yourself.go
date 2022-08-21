@@ -1,5 +1,7 @@
 package main
 
+// ainda não implementada
+
 import (
 	"fmt"
 	"io/ioutil"
