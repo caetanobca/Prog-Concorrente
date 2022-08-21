@@ -24,7 +24,6 @@ Sua implementação da função handle deve usar a API com as funções itemsStr
 - Após o canal retornado por itemsStream ter sido fechado e não houver mais conteúdo a ser consumido, as goroutines que executam bid devem terminar;
 - Após todo o conteúdo de bid ter sido gerado e enviado para o canal de resposta da função handle, esse canal de resposta deve ser fechado.
 
-
 ## [9. Bid timeout](./codigos/9-bid-timeout.go)
 Implemente uma variação da função handle descrita acima, seguindo a nova assinatura abaixo:
 
